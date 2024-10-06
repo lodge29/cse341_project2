@@ -2,8 +2,8 @@ const mongodb = require('../data/database');
 const { ObjectId } = require('mongodb');
 
 // GET ALL
-const getAll = async (req, res) => {
-    const result = await mongodb.getDatabase().db().collection('users').find();
+const getAllSuperheros = async (req, res) => {
+    const result = await mongodb.getDatabase().db().collection('superheros').find();
     result.toArray().then((users) => {
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(users);
@@ -11,9 +11,9 @@ const getAll = async (req, res) => {
 };
 
 // GET single user via id
-const getSingle = async (req, res) => {
+const getSingleSuperhero = async (req, res) => {
     const userId = new ObjectId(req.params.id);
-    const result = await mongodb.getDatabase().db().collection('users').find({ _id: userId });
+    const result = await mongodb.getDatabase().db().collection('superheros').find({ _id: userId });
     result.toArray().then((users) => {
         res.setHeader('Content-Type', 'application/json');
         res.status(200).json(users);
@@ -21,16 +21,18 @@ const getSingle = async (req, res) => {
 };
 
 // CREATE SINGLE USER
-const createUser = async (req, res) => {
+const createSuperhero = async (req, res) => {
     const user = {
-        firstName: req.body.firstName,
-        lastName:req.body.lastName,
+        name: req.body.name,
+        age:req.body.age,
+        power:req.body.power,
         email:req.body.email,
         favoriteColor:req.body.favoriteColor,
+        favoriteSport:req.body.favoriteSport,
         birthday:req.body.birthday
 
     };
-    const response = await mongodb.getDatabase().db().collection('users').insertOne(user);
+    const response = await mongodb.getDatabase().db().collection('superheros').insertOne(user);
     if (response.acknowledged) {
         res.status(204).send();
     } else {
@@ -39,39 +41,42 @@ const createUser = async (req, res) => {
 };
 
 // UPDATE SINGLE USER
-const updateUser = async (req, res) => {
+const updateSuperhero = async (req, res) => {
     const userId = new ObjectId(req.params.id);
     const user = {
-        firstName: req.body.firstName,
-        lastName:req.body.lastName,
+        name: req.body.name,
+        age:req.body.age,
+        power:req.body.power,
         email:req.body.email,
         favoriteColor:req.body.favoriteColor,
+        favoriteSport:req.body.favoriteSport,
         birthday:req.body.birthday
+
     };
-    const response = await mongodb.getDatabase().db().collection('users').replaceOne({_id: userId}, user);
+    const response = await mongodb.getDatabase().db().collection('superheros').replaceOne({_id: userId}, user);
     if (response.modifiedCount > 0) {
         res.status(204).send();
     } else {
-        res.statuse(500).json(response.error || 'Some error ovvured while updating the user');
+        res.statuse(500).json(response.error || 'Some error occured while updating the user');
     }
 };
 
 // DELETE SINGLE USER
-const deleteUser = async (req, res) => {
+const deleteSuperhero = async (req, res) => {
     const userId = new ObjectId(req.params.id);
-    const response = await mongodb.getDatabase().db().collection('users').deleteOne({_id: userId});
+    const response = await mongodb.getDatabase().db().collection('superheros').deleteOne({_id: userId});
     if (response.deletedCount > 0) {
         res.status(204).send();
     } else {
-        res.statuse(500).json(response.error || 'Some error ovvured while updating the user');
+        res.statuse(500).json(response.error || 'Some error occured while updating the user');
     }
 };
 
 // EXPORT for use
 module.exports = {
-    getAll,
-    getSingle,
-    createUser,
-    updateUser,
-    deleteUser
+    getAllSuperheros,
+    getSingleSuperhero,
+    createSuperhero,
+    updateSuperhero,
+    deleteSuperhero
 };

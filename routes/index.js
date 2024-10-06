@@ -8,6 +8,6 @@ router.get('/', greetingsController.helloRoute);
 router.use('/', require('./swagger'));
 
 // users
-router.use('/users', require('./users'));
+router.use('/superheros', require('./superheros'));
 
 module.exports = router;

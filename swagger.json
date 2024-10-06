@@ -5,10 +5,10 @@
     "description": "Users API 2",
     "version": "1.0.0"
   },
-  "host": "cse341-project2-at1h.onrender.com",
+  "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/": {
@@ -31,9 +31,9 @@
         }
       }
     },
-    "/users/": {
+    "/superheros/": {
       "get": {
-        "description": "Get all users",
+        "description": "",
         "produces": [
           "application/json"
         ],
@@ -44,7 +44,7 @@
         }
       },
       "post": {
-        "description": "Create user",
+        "description": "",
         "parameters": [
           {
             "name": "body",
@@ -52,16 +52,22 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "name": {
                   "example": "any"
                 },
-                "lastName": {
+                "age": {
+                  "example": "any"
+                },
+                "power": {
                   "example": "any"
                 },
                 "email": {
                   "example": "any"
                 },
                 "favoriteColor": {
+                  "example": "any"
+                },
+                "favoriteSport": {
                   "example": "any"
                 },
                 "birthday": {
@@ -81,7 +87,7 @@
         }
       }
     },
-    "/users/{id}": {
+    "/superheros/{id}": {
       "get": {
         "description": "",
         "produces": [
@@ -98,6 +104,68 @@
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "age": {
+                  "example": "any"
+                },
+                "power": {
+                  "example": "any"
+                },
+                "email": {
+                  "example": "any"
+                },
+                "favoriteColor": {
+                  "example": "any"
+                },
+                "favoriteSport": {
+                  "example": "any"
+                },
+                "birthday": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
           }
         }
       }

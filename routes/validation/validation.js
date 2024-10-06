@@ -2,16 +2,21 @@ const { body, validationResult } = require('express-validator');
 
 const userValidationRules = () => {
   return [
-    // first name must be letters
-    body('firstName').isString().isLowercase(),
-    // last name must be letters
-    body('lastName').isString(),
-    // must be valid email format: email@domain.com
-    body('email').isEmail(),
-    // must be letters
-    body('favoriteColor').isString(),
-    // must be birthday format: mm/dd/yyyy
-    body('birthday').isString(),
+    // 
+    body('name', 'name is required').isString().isLowercase().withMessage('Name must be only letters and all lowercase'),
+    // 
+    body('age').isInt().withMessage('Age must be an INT (NUMBER)'),
+    // 
+    body('power').isString().isLowercase().withMessage('Power must be only letters and all lowercase'),
+    // 
+    body('email').isEmail().isLowercase().withMessage('Email must be a valid email format: email@domain.com'),
+    // 
+    body('favoriteColor').isString().withMessage('Must be only letters'),
+    // 
+    body('favoriteSport').isString().withMessage('Must be only letters'),
+    // 
+    body('birthday').isString()
+
   ]
 }
 
@@ -23,7 +28,7 @@ const validate = (req, res, next) => {
   const extractedErrors = []
   errors.array().map(err => extractedErrors.push({ [err.param]: err.msg }))
 
-  return res.status(400).json({
+  return res.status(422).json({
     errors: extractedErrors,
   })
 }
