@@ -1,5 +1,6 @@
 const mongodb = require('../data/database');
 const { ObjectId } = require('mongodb');
+const ObjectId = require('mongodb').ObjectId;
 
 // GET ALL
 const getAllSuperheros = async (req, res) => {

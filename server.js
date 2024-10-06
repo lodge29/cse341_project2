@@ -22,6 +22,11 @@ next();
 // routing
 app.use('/', require('./routes'));
 
+// catch any errors
+process.on('uncaughtException', (err, origin) => {
+  console.log(process.stderr.fd, 'Caught exception: ${err}\n' + 'Exception onrigin: ${origin}');
+})
+
 // err if Mongodb doesn't listen
 mongodb.initDb((err) => {
   if(err) {

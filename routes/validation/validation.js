@@ -5,17 +5,17 @@ const userValidationRules = () => {
     // 
     body('name', 'name is required').isString().isLowercase().withMessage('Name must be only letters and all lowercase'),
     // 
-    body('age').isInt().withMessage('Age must be an INT (NUMBER)'),
+    body('age', 'age is required').isInt().withMessage('Age must be an INT (NUMBER)'),
     // 
-    body('power').isString().isLowercase().withMessage('Power must be only letters and all lowercase'),
+    body('power', 'power is required').isString().isLowercase().withMessage('Power must be only letters and all lowercase'),
     // 
-    body('email').isEmail().isLowercase().withMessage('Email must be a valid email format: email@domain.com'),
+    body('email', 'email is required').isEmail().isLowercase().withMessage('Email must be a valid email format: email@domain.com'),
     // 
-    body('favoriteColor').isString().withMessage('Must be only letters'),
+    body('favoriteColor', 'favorite color is required').isString().withMessage('Must be only letters'),
     // 
-    body('favoriteSport').isString().withMessage('Must be only letters'),
+    body('favoriteSport', 'favorite sport is required').isString().withMessage('Must be only letters'),
     // 
-    body('birthday').isString()
+    body('birthday')
 
   ]
 }
